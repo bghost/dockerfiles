@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# You will want the custom seccomp profile from Jessie Frazzelle
+# https://raw.githubusercontent.com/jessfraz/dotfiles/master/etc/docker/seccomp/chrome.json
+
+# Use bghost/chromium:alpine by default
+tag=${1:-alpine}
+proxy=
+
+if [[ $# -gt 2 ]]; then
+    (>&2 printf "%s\n" \
+        "chromium takes 2 optional arguments \"tor\" to use the proxy and <tag>")
+            return 1
+fi
+if  [[ "$1" == "tor" ]]; then
+    proxy="socks5://172.17.0.1:9050"
+    tag="alpine"
+fi
+if [[ $# -eq 2 ]]; then
+    tag="$2"
+fi
+
+# u2f may require the user be in the plugdev group
+# also, the --device /dev/hidraw1 line may need modification. Check dmesg.
+# `find /dev -name 'hidraw*' | head -n 2` or so
+
+docker run --rm -d \
+    -c 4 \
+    -m 4096M \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -v "${HOME}/Downloads:/home/chromium/Downloads" \
+    -v "${HOME}/.config/chromium:/home/chromium/data" \
+    -v /dev/shm:/dev/shm \
+    -v /etc/hosts:/etc/hosts \
+    --security-opt seccomp="${HOME}/chrome.json" \
+    --device /dev/snd \
+    --device /dev/dri \
+    --device /dev/usb \
+    --device /dev/bus/usb \
+    --device /dev/hidraw0 \
+    --device /dev/hidraw1 \
+    --name chromium \
+    bghost/chromium:"$tag" \
+    --user-data-dir="/home/chromium/data" \
+    --proxy-server="$proxy" \
+    --force-device-scale-factor="1.3" \
+    --enable-native-gpu-memory-buffers
