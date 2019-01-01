@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -euo pipefail
+
+user='bghost'
+repo='chromium'
+tag='alpine'
+
+# set environment vars
+export GID=$(id -g)
+export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
+export ID=$(id -u)
+
+# build the container:
+docker build \
+    --build-arg GID=${GID} \
+    --build-arg ID=${ID} \
+    --build-arg PLUGDEV=${PLUGDEV} \
+    -t ${user}/${repo}:${tag} .
+
+# clean up our host environment
+unset {GID,PLUGDEV,ID}
