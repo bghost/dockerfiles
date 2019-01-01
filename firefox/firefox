@@ -1,0 +1,22 @@
+#!/bin/bash
+
+tag=${1:-rawhide}
+yubikey="$(find /dev -name hidraw[1-4])" 
+
+docker run --rm -d \
+    -c 2 \
+    -m 4096M \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -v "${HOME}/Downloads:/home/firefox/Downloads" \
+    -v "${HOME}/.mozilla/firefox:/home/firefox/.mozilla/firefox" \
+    -v /dev/shm:/dev/shm \
+    --device /dev/snd \
+    --device /dev/dri \
+    --device /dev/usb \
+    --device /dev/bus/usb \
+    --device /dev/hidraw0 \
+    --device "$(echo $yubikey | awk '{print $1}')" \
+    --name firefox \
+    bghost/firefox:${tag}
