@@ -1,6 +1,8 @@
 # Dockerfiles
 
-## The main credit for this repo goes to [@jessfraz](https://twitter.com/jessfraz) and her [excellent repo](https://github.com/jessfraz/dockerfiles)
+## This repo has some recipes for building and running desktop containers
+
+### The main credit for this repo goes to [@jessfraz](https://twitter.com/jessfraz) and her [excellent repo](https://github.com/jessfraz/dockerfiles)
 
 Each subdirectory should have a `Dockerfile` and bash scripts which can be
 used to build and run the image respectively.
