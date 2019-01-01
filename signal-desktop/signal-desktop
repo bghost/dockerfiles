@@ -1,0 +1,19 @@
+#!/bin/bash
+
+tag=${1:-bionic}
+shared=$(mktemp -d /tmp/signal.XXXXXXXX)
+
+docker run --rm -d \
+    --cap-drop=all \
+    -c 2 \
+    -m 512M \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -v /dev/shm:/dev/shm \
+    -v "${HOME}/.config/Signal:/home/signal/.config/Signal" \
+    -v "${shared}:/home/signal/attachments" \
+    --device /dev/dri \
+    --device /dev/snd \
+    --name signal-desktop \
+    bghost/signal-desktop:${tag}
