@@ -1,18 +1,15 @@
 # Dockerfiles
 
-## The main credit for this repo goes to
-@jessfraz[https://twitter.com/jessfraz] and her [excellent
-repo](https://github.com/jessfraz/dockerfiles)
+## The main credit for this repo goes to [@jessfraz](https://twitter.com/jessfraz) and her [excellent repo](https://github.com/jessfraz/dockerfiles)
 
-Each subdirectory should have a `Dockerfile` and a bash script which can be
+Each subdirectory should have a `Dockerfile` and bash scripts which can be
 used to build and run the image respectively.
 
 Building should be done with tags in the directory containing the
 desired `Dockerfile`, for example:
 
 ```console
-$ cd chromium &&
-    sh docker build -t bghost/chromium:alpine .
+$ cd chromium && docker build -t bghost/chromium:alpine .
 ```
 
 The commands present in the associated bash scripts can easily be modified to
