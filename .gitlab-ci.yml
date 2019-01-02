@@ -1,9 +1,9 @@
 chromium:edge:
-    image: chromium:edge
+    image: alpine:edge
     script:
         - cd chromium && ./build edge
 
 chromium:sid:
-    image: chromium:edge
+    image: alpine:sid
     script:
         - cd chromium && ./build sid
