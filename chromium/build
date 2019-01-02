@@ -2,7 +2,10 @@
 
 set -euo pipefail
 
-registry=
+if [ -z "$registry" ]; then
+    registry=
+fi
+
 user='bghost'
 repo='chromium'
 tag=${1:-edge}
