@@ -1,13 +1,14 @@
 image: docker:latest
-services:
-    - docker:dind
+
+before_script:
+    - apk upgrade -U && apk add bash
 
 chromium:edge:
     script:
         - cd chromium
-        - bash build edge
+        - bash ./build edge
 
 chromium:sid:
     script:
         - cd chromium
-        - bash build sid
+        - bash ./build sid
