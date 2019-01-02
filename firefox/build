@@ -2,15 +2,24 @@
 
 set -euo pipefail
 
-registry=
+if [ -z "$registry" ]; then
+    registry=
+fi
+
 user='bghost'
 repo='firefox'
 tag=${1:-rawhide}
 
 # set environment vars
-export GID=$(id -g)
-export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
-export ID=$(id -u)
+if [ -z "$GID" ]; then
+    export GID=$(id -g)
+fi
+if [ -z "$PLUGDEV" ]; then
+    export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
+fi
+if [ -z "$ID" ]; then
+    export ID=$(id -u)
+fi
 
 # build the container:
 docker build \
@@ -18,6 +27,8 @@ docker build \
     --build-arg ID=${ID} \
     --build-arg PLUGDEV=${PLUGDEV} \
     -t ${registry}${user}/${repo}:${tag} $(find . -type d -name ${tag})
+
+docker push ${registry}${user}/${repo}:${tag}
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}

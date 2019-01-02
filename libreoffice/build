@@ -2,20 +2,29 @@
 
 set -euo pipefail
 
-registry=
+if [ -z "$registry" ]; then
+    registry=
+fi
+
 user='bghost'
 repo='libreoffice'
 tag=${1:-edge}
 
 # set environment vars
-export GID=$(id -g)
-export ID=$(id -u)
+if [ -z "$GID" ]; then
+    export GID=$(id -g)
+fi
+if [ -z "$ID" ]; then
+    export ID=$(id -u)
+fi
 
 # build the container:
 docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
     -t ${registry}${user}/${repo}:${tag} $(find . -type d -name ${tag})
+
+docker push ${registry}${user}/${repo}:${tag}
 
 # clean up our host environment
 unset {GID,ID}

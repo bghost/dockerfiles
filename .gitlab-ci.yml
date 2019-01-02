@@ -24,3 +24,37 @@ chromium:sid:
         - export GID=1000
         - export PLUGDEV=240
         - bash ./build sid
+
+firefox:rawhide:
+    script:
+        - cd firefox
+        - export registry="registry.gitlab.com/bghost/dockerfiles/"
+        - export ID=1000
+        - export GID=1000
+        - export PLUGDEV=240
+        - bash ./build rawhide
+
+firefox:disco:
+    script:
+        - cd firefox
+        - export registry="registry.gitlab.com/bghost/dockerfiles/"
+        - export ID=1000
+        - export GID=1000
+        - export PLUGDEV=240
+        - bash ./build disco
+
+libreoffice:edge:
+    script:
+        - cd libreoffice
+        - export registry="registry.gitlab.com/bghost/dockerfiles/"
+        - export ID=1000
+        - export GID=1000
+        - bash ./build edge
+
+signal-desktop:bionic:
+    script:
+        - cd signal-desktop
+        - export registry="registry.gitlab.com/bghost/dockerfiles/"
+        - export ID=1000
+        - export GID=1000
+        - bash ./build bionic
