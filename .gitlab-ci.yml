@@ -5,6 +5,7 @@ services:
 
 before_script:
     - apk upgrade -U && apk add bash
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 chromium:edge:
     script:
