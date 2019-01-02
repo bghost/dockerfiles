@@ -4,8 +4,10 @@ services:
 
 chromium:edge:
     script:
-        - cd chromium && ./build edge
+        - cd chromium
+        - ./build edge
 
 chromium:sid:
     script:
-        - cd chromium && ./build sid
+        - cd chromium
+        - ./build sid
