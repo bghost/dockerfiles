@@ -8,9 +8,15 @@ repo='chromium'
 tag=${1:-edge}
 
 # set environment vars
-export GID=$(id -g)
-export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
-export ID=$(id -u)
+if [ -z "$GID" ]; then
+    export GID=$(id -g)
+fi
+if [ -z "$PLUGDEV" ]; then
+    export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
+fi
+if [ -z "$ID" ]; then
+    export ID=$(id -u)
+fi
 
 # build the container:
 docker build \
