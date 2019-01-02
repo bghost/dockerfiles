@@ -8,8 +8,7 @@ LABEL maintainer "bghost bghost@bghost.xyz"
 # with the testing repo for other containers
 
 # Setup testing repository for alpine and update
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
-        >>/etc/apk/repositories \
+RUN apk add --no-cache "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
     && apk upgrade --no-cache
 
 
