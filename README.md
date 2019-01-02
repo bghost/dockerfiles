@@ -23,6 +23,7 @@ This will run the following `build` script:
 
 set -euo pipefail
 
+registry=
 user='bghost'
 repo='chromium'
 tag='alpine'
@@ -37,7 +38,7 @@ docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
     --build-arg PLUGDEV=${PLUGDEV} \
-    -t ${user}/${repo}:${tag} .
+    -t ${registry}${user}/${repo}:${tag} .
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}
