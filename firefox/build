@@ -2,9 +2,10 @@
 
 set -euo pipefail
 
+registry=
 user='bghost'
 repo='firefox'
-tag='rawhide'
+tag=${1:-rawhide}
 
 # set environment vars
 export GID=$(id -g)
@@ -16,7 +17,7 @@ docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
     --build-arg PLUGDEV=${PLUGDEV} \
-    -t ${user}/${repo}:${tag} $(find . -type d -name ${tag})
+    -t ${registry}${user}/${repo}:${tag} $(find . -type d -name ${tag})
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}
