@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -euo pipefail
+
+user='bghost'
+repo='libreoffice'
+tag=${1:-edge}
+
+# set environment vars
+export GID=$(id -g)
+export ID=$(id -u)
+
+# build the container:
+docker build \
+    --build-arg GID=${GID} \
+    --build-arg ID=${ID} \
+    -t ${user}/${repo}:${tag} $(find . -type d -name ${tag})
+
+# clean up our host environment
+unset {GID,ID}
