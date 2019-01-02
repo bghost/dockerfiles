@@ -25,8 +25,7 @@ docker build \
     --build-arg PLUGDEV=${PLUGDEV} \
     -t ${registry}${user}/${repo}:${tag} $(find . -type d -name ${tag})
 
-docker push \
-    -t ${registry}${user}/${repo}:${tag}
+docker push ${registry}${user}/${repo}:${tag}
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}
