@@ -23,8 +23,8 @@ This will run the following Dockerfile:
 FROM alpine:edge
 LABEL maintainer "bghost bghost@bghost.xyz"
 
-RUN apk add --no-cache \
-    --repository "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+        >>/etc/apk/repositories \
     && apk upgrade --no-cache
 
 ARG GID
