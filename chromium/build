@@ -5,7 +5,7 @@ set -euo pipefail
 registry=
 user='bghost'
 repo='chromium'
-tag='alpine'
+tag=${1:-alpine}
 
 # set environment vars
 export GID=$(id -g)
