@@ -5,9 +5,9 @@ services:
 chromium:edge:
     script:
         - cd chromium
-        - ./build edge
+        - bash build edge
 
 chromium:sid:
     script:
         - cd chromium
-        - ./build sid
+        - bash build sid
