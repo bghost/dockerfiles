@@ -32,7 +32,7 @@ ARG ID
 # Alternatively, hardcoding these vars will make a smaller image
 
 
-RUN apk add chromium mesa-dri-intel mesa-gl \
+RUN apk add chromium font-noto mesa-dri-intel mesa-gl \
     && apk add libu2f-host \
     && addgroup -S chromium -g $GID \
     && addgroup -S plugdev -g $PLUGDEV \
