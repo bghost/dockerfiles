@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+registry=
 user='bghost'
 repo='libreoffice'
 tag=${1:-edge}
@@ -14,7 +15,7 @@ export ID=$(id -u)
 docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
-    -t ${user}/${repo}:${tag} $(find . -type d -name ${tag})
+    -t ${registry}${user}/${repo}:${tag} $(find . -type d -name ${tag})
 
 # clean up our host environment
 unset {GID,ID}
