@@ -31,6 +31,7 @@ ARG PLUGDEV
 ARG ID
 # Alternatively, hardcoding these vars will make a smaller image
 
+
 RUN apk add chromium mesa-dri-intel mesa-gl \
     && apk add libu2f-host \
     && addgroup -S chromium -g $GID \
@@ -42,6 +43,7 @@ RUN apk add chromium mesa-dri-intel mesa-gl \
     && mkdir -p /home/chromium/Downloads \
     && mkdir -p /home/chromium/data \
     && chown -R chromium:chromium /home/chromium
+
 
 # Run as non privileged user
 USER chromium
