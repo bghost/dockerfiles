@@ -1,0 +1,9 @@
+chromium:edge
+    image: chromium:edge
+    script:
+        - cd chromium && ./build edge
+
+chromium:sid
+    image: chromium:edge
+    script:
+        - cd chromium && ./build sid
