@@ -9,9 +9,15 @@ before_script:
 chromium:edge:
     script:
         - cd chromium
+        - export ID=1000
+        - export GID=1000
+        - export PLUGDEV=240
         - bash ./build edge
 
 chromium:sid:
     script:
         - cd chromium
+        - export ID=1000
+        - export GID=1000
+        - export PLUGDEV=240
         - bash ./build sid
