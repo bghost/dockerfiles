@@ -7,8 +7,13 @@ RUN apt-get update && apt-get dist-upgrade -y \
     && apt-get install -y firefox \
     && apt-get install -y libgl1-mesa-dri libgl1-mesa-glx
     
-RUN groupadd -g 1000 firefox \
-    && useradd -m -G audio,video,plugdev -u 1000 -g 1000 firefox \
+ARG GID
+ARG PLUGDEV
+ARG ID
+
+RUN groupadd -g $GID firefox \
+    && groupmod -g $PLUGDEV plugdev \
+    && useradd -m -G audio,video,plugdev -u $ID -g $GID firefox \
     && mkdir -p /home/firefox/Downloads \
     && mkdir -p /home/firefox/.mozilla/firefox \
     && chown -R firefox:firefox /home/firefox \

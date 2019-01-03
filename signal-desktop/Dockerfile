@@ -13,8 +13,8 @@ RUN apt-get update && apt-get dist-upgrade -y \
     && echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" \
         >/etc/apt/sources.list.d/signal-xenial.list \
     && apt-get update && apt-get install -y signal-desktop \
-    && groupadd -g 1000 signal \
-    && useradd -m -G audio,video -u 1000 -g 1000 signal \
+    && groupadd -g $GID signal \
+    && useradd -m -G audio,video -u $ID -g $GID signal \
     && mkdir -p /home/signal/.config/Signal \
     && mkdir -p /home/signal/attachments \
     && chown -R signal:signal /home/signal \
