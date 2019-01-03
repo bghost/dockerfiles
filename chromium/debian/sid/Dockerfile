@@ -16,7 +16,8 @@ RUN groupadd -g $GID chromium \
     && useradd -m -G audio,video,plugdev -u $ID -g $GID chromium \
     && mkdir -p /home/chromium/Downloads \
     && mkdir -p /home/chromium/data \
-    && chown -R chromium:chromium /home/chromium
+    && chown -R chromium:chromium /home/chromium \
+    && rm -rf /var/lib/apt/lists/*
 
 # Run as non privileged user
 USER chromium

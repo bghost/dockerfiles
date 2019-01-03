@@ -17,7 +17,8 @@ RUN apt-get update && apt-get dist-upgrade -y \
     && useradd -m -G audio,video -u 1000 -g 1000 signal \
     && mkdir -p /home/signal/.config/Signal \
     && mkdir -p /home/signal/attachments \
-    && chown -R signal:signal /home/signal
+    && chown -R signal:signal /home/signal \
+    && rm -rf /var/lib/apt/lists/*
 
 # Run as non privileged user
 USER signal

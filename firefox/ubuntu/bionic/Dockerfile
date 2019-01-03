@@ -16,7 +16,8 @@ RUN groupadd -g $GID firefox \
     && useradd -m -G audio,video,plugdev -u $ID -g $GID firefox \
     && mkdir -p /home/firefox/Downloads \
     && mkdir -p /home/firefox/.mozilla/firefox \
-    && chown -R firefox:firefox /home/firefox
+    && chown -R firefox:firefox /home/firefox \
+    && rm -rf /var/lib/apt/lists/*
 
 # Run as non privileged user
 USER firefox
