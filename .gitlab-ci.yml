@@ -7,6 +7,8 @@ before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
     - export PUSH="true"
+    # Change below to match the user and group ID's
+    # on the target host machine
     - export ID=1000
     - export GID=1000
     - export PLUGDEV=240
