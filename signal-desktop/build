@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-if [ -z "$registry" ]; then
-    registry=
+if [ -z "$REGISTRY" ]; then
+    REGISTRY=
 fi
 
 user='bghost'
@@ -22,9 +22,9 @@ fi
 docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
-    -t ${registry}${user}/${repo}:${tag} .
+    -t ${REGISTRY}${user}/${repo}:${tag} .
 
-docker push ${registry}${user}/${repo}:${tag}
+docker push ${REGISTRY}${user}/${repo}:${tag}
 
 # clean up our host environment
 unset {GID,ID}

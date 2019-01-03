@@ -23,7 +23,7 @@ This will run the following `build` script:
 
 set -euo pipefail
 
-registry=
+REGISTRY=
 user='bghost'
 repo='chromium'
 tag=${1:-alpine}
@@ -38,7 +38,7 @@ docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
     --build-arg PLUGDEV=${PLUGDEV} \
-    -t ${registry}${user}/${repo}:${tag} .
+    -t ${REGISTRY}${user}/${repo}:${tag} .
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}
@@ -160,4 +160,4 @@ Before running any of the containers, it is necessary to run something such as
 
 ### TODO:
 
-* CI pipeline and Docker registry for regular updates
+* CI pipeline and Docker REGISTRY for regular updates
