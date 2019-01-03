@@ -19,6 +19,8 @@ RUN groupadd -g $GID chromium \
     && chown -R chromium:chromium /home/chromium \
     && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /home/chromium
+
 # Run as non privileged user
 USER chromium
 

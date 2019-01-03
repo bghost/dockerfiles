@@ -20,6 +20,8 @@ RUN apt-get update && apt-get dist-upgrade -y \
     && chown -R signal:signal /home/signal \
     && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /home/signal
+
 # Run as non privileged user
 USER signal
 

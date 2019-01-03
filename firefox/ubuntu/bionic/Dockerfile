@@ -19,6 +19,8 @@ RUN groupadd -g $GID firefox \
     && chown -R firefox:firefox /home/firefox \
     && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /home/firefox
+
 # Run as non privileged user
 USER firefox
 

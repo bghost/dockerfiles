@@ -23,6 +23,8 @@ RUN addgroup -S firefox -g $GID \
     && mkdir -p /home/firefox/.mozilla/firefox \
     && chown -R firefox:firefox /home/firefox
 
+WORKDIR /home/firefox
+
 # Run as non privileged user
 USER firefox
 

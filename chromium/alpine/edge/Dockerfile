@@ -44,6 +44,7 @@ RUN apk add chromium font-noto mesa-dri-intel mesa-gl \
     && mkdir -p /home/chromium/data \
     && chown -R chromium:chromium /home/chromium
 
+WORKDIR /home/chromium
 
 # Run as non privileged user
 USER chromium
