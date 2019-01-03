@@ -95,8 +95,8 @@ wrapped in a function and added to the appropriately sourced file such as
 # You will want the custom seccomp profile from Jessie Frazzelle
 # https://raw.githubusercontent.com/jessfraz/dotfiles/master/etc/docker/seccomp/chrome.json
 
-# Use bghost/chromium:alpine by default
-tag=${1:-alpine}
+# Use bghost/chromium:edge by default
+tag=${1:-edge}
 proxy=
 
 if [[ $# -gt 2 ]]; then
@@ -106,7 +106,7 @@ if [[ $# -gt 2 ]]; then
 fi
 if  [[ "$1" == "tor" ]]; then
     proxy="socks5://172.17.0.1:9050"
-    tag="alpine"
+    tag="edge"
 fi
 if [[ $# -eq 2 ]]; then
     tag="$2"
