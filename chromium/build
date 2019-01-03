@@ -2,24 +2,16 @@
 
 set -euo pipefail
 
-if [ -z "$REGISTRY" ]; then
-    REGISTRY=
-fi
+REGISTRY="${REGISTRY:-}"
 
 user='bghost'
 repo='chromium'
 tag=${1:-edge}
 
 # set environment vars
-if [ -z "$GID" ]; then
-    export GID=$(id -g)
-fi
-if [ -z "$PLUGDEV" ]; then
-    export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
-fi
-if [ -z "$ID" ]; then
-    export ID=$(id -u)
-fi
+GID=${GID:-$(id -g)}
+PLUGDEV=${PLUGDEV:-$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)}
+ID=${ID:-$(id -u)}
 
 # build the container:
 docker build \
@@ -28,7 +20,9 @@ docker build \
     --build-arg PLUGDEV=${PLUGDEV} \
     -t ${REGISTRY}${user}/${repo}:${tag} $(find . -type d -name ${tag})
 
-docker push ${REGISTRY}${user}/${repo}:${tag}
+if [[ "${PUSH:-}" == "true" ]]; then
+    docker push ${REGISTRY}${user}/${repo}:${tag}
+fi
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}

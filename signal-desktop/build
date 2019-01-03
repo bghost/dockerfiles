@@ -2,21 +2,15 @@
 
 set -euo pipefail
 
-if [ -z "$REGISTRY" ]; then
-    REGISTRY=
-fi
+REGISTRY="${REGISTRY:-}"
 
 user='bghost'
 repo='signal-desktop'
 tag='bionic'
 
 # set environment vars
-if [ -z "$GID" ]; then
-    export GID=$(id -g)
-fi
-if [ -z "$ID" ]; then
-    export ID=$(id -u)
-fi
+GID=${GID:-$(id -g)}
+ID=${ID:-$(id -u)}
 
 # build the container:
 docker build \
@@ -24,7 +18,9 @@ docker build \
     --build-arg ID=${ID} \
     -t ${REGISTRY}${user}/${repo}:${tag} .
 
-docker push ${REGISTRY}${user}/${repo}:${tag}
+if [[ "${PUSH:-}" == "true" ]]; then
+    docker push ${REGISTRY}${user}/${repo}:${tag}
+fi
 
 # clean up our host environment
 unset {GID,ID}
