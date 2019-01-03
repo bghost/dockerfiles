@@ -23,27 +23,31 @@ This will run the following `build` script:
 
 set -euo pipefail
 
-REGISTRY=
+REGISTRY="${REGISTRY:-}"
+
 user='bghost'
 repo='chromium'
-tag=${1:-alpine}
+tag=${1:-edge}
 
 # set environment vars
-export GID=$(id -g)
-export PLUGDEV=$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)
-export ID=$(id -u)
+GID=${GID:-$(id -g)}
+PLUGDEV=${PLUGDEV:-$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)}
+ID=${ID:-$(id -u)}
 
 # build the container:
 docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
     --build-arg PLUGDEV=${PLUGDEV} \
-    -t ${REGISTRY}${user}/${repo}:${tag} .
+    -t ${REGISTRY}${user}/${repo}:${tag} $(find . -type d -name ${tag})
+
+if [[ "${PUSH:-}" == "true" ]]; then
+    docker push ${REGISTRY}${user}/${repo}:${tag}
+fi
 
 # clean up our host environment
 unset {GID,PLUGDEV,ID}
 ```
-
 
 This script builds the tagged `chromium` image using the following Dockerfile:
 
