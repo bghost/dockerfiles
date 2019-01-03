@@ -10,7 +10,7 @@ before_script:
 chromium:edge:
     script:
         - cd chromium
-        - export REGISTRY="REGISTRY.gitlab.com/bghost/dockerfiles/"
+        - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
         - export ID=1000
         - export GID=1000
         - export PLUGDEV=240
@@ -19,7 +19,7 @@ chromium:edge:
 chromium:sid:
     script:
         - cd chromium
-        - export REGISTRY="REGISTRY.gitlab.com/bghost/dockerfiles/"
+        - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
         - export ID=1000
         - export GID=1000
         - export PLUGDEV=240
@@ -28,7 +28,7 @@ chromium:sid:
 firefox:rawhide:
     script:
         - cd firefox
-        - export REGISTRY="REGISTRY.gitlab.com/bghost/dockerfiles/"
+        - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
         - export ID=1000
         - export GID=1000
         - export PLUGDEV=240
@@ -37,7 +37,7 @@ firefox:rawhide:
 firefox:disco:
     script:
         - cd firefox
-        - export REGISTRY="REGISTRY.gitlab.com/bghost/dockerfiles/"
+        - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
         - export ID=1000
         - export GID=1000
         - export PLUGDEV=240
@@ -46,7 +46,7 @@ firefox:disco:
 libreoffice:edge:
     script:
         - cd libreoffice
-        - export REGISTRY="REGISTRY.gitlab.com/bghost/dockerfiles/"
+        - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
         - export ID=1000
         - export GID=1000
         - bash ./build edge
@@ -54,7 +54,7 @@ libreoffice:edge:
 signal-desktop:bionic:
     script:
         - cd signal-desktop
-        - export REGISTRY="REGISTRY.gitlab.com/bghost/dockerfiles/"
+        - export REGISTRY="registry.gitlab.com/bghost/dockerfiles/"
         - export ID=1000
         - export GID=1000
         - bash ./build bionic
