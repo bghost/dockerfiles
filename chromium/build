@@ -9,19 +9,19 @@ repo='chromium'
 tag=${1:-edge}
 
 # set environment vars
-GID=${GID:-$(id -g)}
-PLUGDEV=${PLUGDEV:-$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)}
-ID=${ID:-$(id -u)}
+GID="${GID:-$(id -g)}"
+PLUGDEV="${PLUGDEV:-$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)}"
+ID="${ID:-$(id -u)}"
 
 # build the container:
 docker build \
-    --build-arg GID=${GID} \
-    --build-arg ID=${ID} \
-    --build-arg PLUGDEV=${PLUGDEV} \
-    -t ${REGISTRY}${user}/${repo}:${tag} $(find . -type d -name ${tag})
+    --build-arg GID="${GID}" \
+    --build-arg ID="${ID}" \
+    --build-arg PLUGDEV="${PLUGDEV}" \
+    -t "${REGISTRY}${user}/${repo}:${tag}" "$(find . -type d -name "${tag}")"
 
 if [[ "${PUSH:-}" == "true" ]]; then
-    docker push ${REGISTRY}${user}/${repo}:${tag}
+    docker push "${REGISTRY}${user}/${repo}:${tag}"
 fi
 
 # clean up our host environment
