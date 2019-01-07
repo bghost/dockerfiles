@@ -33,6 +33,7 @@ ARG ID
 
 
 RUN apk add chromium font-noto mesa-dri-intel mesa-gl \
+    && ln -s /usr/bin/chromium-browser /usr/bin/chromium \
     && apk add libu2f-host \
     && addgroup -S chromium -g $GID \
     && addgroup -S plugdev -g $PLUGDEV \
