@@ -10,14 +10,16 @@ tag=${1:-edge}
 
 # set environment vars
 GID="${GID:-$(id -g)}"
-PLUGDEV="${PLUGDEV:-$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)}"
+PLUGDEV="${PLUGDEV:-$(getent group plugdev | cut -d ':' -f 3)}"
+AUDIO="${AUDIO:-$(getent group audio | cut -d ':' -f 3)}"
 ID="${ID:-$(id -u)}"
 
 # build the container:
 docker build \
     --build-arg GID="${GID}" \
-    --build-arg ID="${ID}" \
     --build-arg PLUGDEV="${PLUGDEV}" \
+    --build-arg ID="${ID}" \
+    --build-arg AUDIO="${AUDIO}" \
     -t "${REGISTRY}${user}/${repo}:${tag}" "$(find . -type d -name "${tag}")"
 
 if [[ "${PUSH:-}" == "true" ]]; then
@@ -25,4 +27,4 @@ if [[ "${PUSH:-}" == "true" ]]; then
 fi
 
 # clean up our host environment
-unset {GID,PLUGDEV,ID}
+unset {GID,PLUGDEV,ID,AUDIO}

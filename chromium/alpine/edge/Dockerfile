@@ -29,6 +29,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
 ARG GID
 ARG PLUGDEV
 ARG ID
+ARG AUDIO
 # Alternatively, hardcoding these vars will make a smaller image
 
 
@@ -38,7 +39,7 @@ RUN apk add chromium font-noto mesa-dri-intel mesa-gl \
     && addgroup -S chromium -g $GID \
     && addgroup -S plugdev -g $PLUGDEV \
     && adduser -S chromium -G chromium -u $ID \
-    && addgroup chromium audio \
+    && addgroup chromium audio -g $AUDIO \
     && addgroup chromium video \
     && addgroup chromium plugdev \
     && mkdir -p /home/chromium/Downloads \

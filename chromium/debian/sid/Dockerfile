@@ -10,9 +10,11 @@ RUN apt-get update && apt-get dist-upgrade -y \
 ARG GID
 ARG PLUGDEV
 ARG ID
+ARG AUDIO
     
 RUN groupadd -g $GID chromium \
     && groupmod -g $PLUGDEV plugdev \
+    && groupmod -g $AUDIO audio \
     && useradd -m -G audio,video,plugdev -u $ID -g $GID chromium \
     && mkdir -p /home/chromium/Downloads \
     && mkdir -p /home/chromium/data \
