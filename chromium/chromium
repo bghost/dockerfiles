@@ -14,7 +14,6 @@ if [[ $# -gt 2 ]]; then
 fi
 if  [[ "$1" == "tor" ]]; then
     proxy="socks5://172.17.0.1:9050"
-    tag="edge"
 fi
 if [[ $# -eq 2 ]]; then
     tag="$2"
