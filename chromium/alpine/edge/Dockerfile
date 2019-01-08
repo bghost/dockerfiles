@@ -40,7 +40,7 @@ RUN apk add chromium font-noto mesa-dri-intel mesa-gl \
     && apk add libu2f-host \
     && addgroup -S chromium -g $GID \
     && addgroup -S plugdev -g $PLUGDEV \
-    && addgroup groupmod -g $AUDIO audio \
+    && groupmod -g $AUDIO audio \
     && adduser -S chromium -G chromium -u $ID \
     && addgroup chromium audio \
     && addgroup chromium video \
