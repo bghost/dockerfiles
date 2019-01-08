@@ -12,6 +12,7 @@ before_script:
     - export ID=1000
     - export GID=1000
     - export PLUGDEV=240
+    - export AUDIO=18
 
 chromium:edge:
     script:
