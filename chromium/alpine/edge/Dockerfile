@@ -19,17 +19,19 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
 # * Need to explicitly set UID / GID to avoid issues with persistence
 
 # We can export environment vars on the host:
-# export PLUGDEV=$(/bin/grep "plgudev" /etc/group | cut -d ':' -f 3)
-# export ID=$(id -u)
 # export GID=$(id -g)
+# export PLUGDEV=$(getent group plugdev | cut -d ':' -f 3)
+# export AUDIO=$(getent group audio | cut -d ':' -f 3)
+# export ID=$(id -u)
 # use the --build-arg flag to pass them to the image at build time
 #  --build-arg GID=${GID}
 #  --build-arg PLUGDEV=${PLUGDEV}
+#  --build-arg AUDIO=${AUDIO}
 #  --build-arg ID=${ID}
 ARG GID
 ARG PLUGDEV
-ARG ID
 ARG AUDIO
+ARG ID
 # Alternatively, hardcoding these vars will make a smaller image
 
 
@@ -38,8 +40,9 @@ RUN apk add chromium font-noto mesa-dri-intel mesa-gl \
     && apk add libu2f-host \
     && addgroup -S chromium -g $GID \
     && addgroup -S plugdev -g $PLUGDEV \
+    && addgroup -S audio -g $AUDIO \
     && adduser -S chromium -G chromium -u $ID \
-    && addgroup chromium audio -g $AUDIO \
+    && addgroup chromium audio \
     && addgroup chromium video \
     && addgroup chromium plugdev \
     && mkdir -p /home/chromium/Downloads \
