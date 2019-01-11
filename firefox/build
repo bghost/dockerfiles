@@ -8,19 +8,21 @@ user='bghost'
 repo='firefox'
 tag=${1:-rawhide}
 
-GID=${GID:-$(id -g)}
-PLUGDEV=${PLUGDEV:-$(/bin/grep "plugdev" /etc/group | cut -d ':' -f 3)}
-ID=${ID:-$(id -u)}
+GID="${GID:-$(id -g)}"
+PLUGDEV="${PLUGDEV:-$(getent group plugdev | cut -d ':' -f 3)}"
+AUDIO="${AUDIO:-$(getent group audio | cut -d ':' -f 3)}"
+ID="${ID:-$(id -u)}"
 
 # build the container:
 docker build \
     --build-arg GID=${GID} \
     --build-arg ID=${ID} \
     --build-arg PLUGDEV=${PLUGDEV} \
-    -t ${REGISTRY}${user}/${repo}:${tag} $(find . -type d -name ${tag})
+    --build-arg AUDIO="${AUDIO}" \
+    -t "${REGISTRY}${user}/${repo}:${tag}" "$(find . -type d -name "${tag}")"
 
 if [[ "${PUSH:-}" == "true" ]]; then
-    docker push ${REGISTRY}${user}/${repo}:${tag}
+    docker push "${REGISTRY}${user}/${repo}:${tag}"
 fi
 
 # clean up our host environment
