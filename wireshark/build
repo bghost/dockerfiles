@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+REGISTRY="${REGISTRY:-}"
+
+user='bghost'
+repo='wireshark'
+tag=${1:-buster}
+
+# set environment vars
+GID="${GID:-$(id -g)}"
+PLUGDEV="${PLUGDEV:-$(getent group plugdev | cut -d ':' -f 3)}"
+AUDIO="${AUDIO:-$(getent group audio | cut -d ':' -f 3)}"
+ID="${ID:-$(id -u)}"
+
+# build the container:
+docker build \
+    --build-arg GID="${GID}" \
+    --build-arg PLUGDEV="${PLUGDEV}" \
+    --build-arg ID="${ID}" \
+    --build-arg AUDIO="${AUDIO}" \
+    -t "${REGISTRY}${user}/${repo}:${tag}" "$(find . -type d -name "${tag}")"
+
+if [[ "${PUSH:-}" == "true" ]]; then
+    docker push "${REGISTRY}${user}/${repo}:${tag}"
+fi
+
+# clean up our host environment
+unset {GID,PLUGDEV,ID,AUDIO}
