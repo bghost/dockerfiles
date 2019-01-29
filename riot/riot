@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Use bghost/riot:cosmic by default
+tag="${1:-cosmic}"
+
+docker run --rm -d \
+    --cap-drop=all \
+    -c 2 \
+    -m 1024M \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=unix${DISPLAY}" \
+    -v /dev/shm:/dev/shm \
+    -v "${HOME}/.config/Riot:/home/riot/.config/Riot" \
+    --device /dev/snd \
+    --device /dev/dri \
+    --name riot \
+    bghost/riot:"${tag}"
+
