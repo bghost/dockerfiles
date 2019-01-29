@@ -48,3 +48,8 @@ signal-desktop:bionic:
     script:
         - cd signal-desktop
         - bash ./build bionic
+
+riot:cosmic:
+    script:
+        - cd riot
+        - bash ./build cosmic
