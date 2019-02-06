@@ -5,7 +5,7 @@ LABEL maintainer "bghost bghost@bghost.xyz"
 
 RUN apt-get update && apt-get dist-upgrade -y \
     && apt-get install -y chromium \
-    && apt-get install -y libgl1-mesa-dri libgl1-mesa-glx
+    && apt-get install -y libgl1-mesa-dri libglx-mesa0
 
 ARG GID
 ARG PLUGDEV
@@ -26,4 +26,4 @@ WORKDIR /home/chromium
 # Run as non privileged user
 USER chromium
 
-ENTRYPOINT [ "/usr/bin/chromium" ]
+ENTRYPOINT ["/usr/bin/chromium"]
