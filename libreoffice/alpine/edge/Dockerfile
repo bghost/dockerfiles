@@ -17,10 +17,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
     && mkdir -p /home/libreoffice/Documents \
     && chown -R libreoffice:libreoffice /home/libreoffice
 
-WORKDIR /home/libreoffice
+WORKDIR /home/libreoffice/Documents
 
 # Run as non privileged user
 USER libreoffice
 
-ENTRYPOINT [ "/usr/bin/libreoffice" ]
+ENTRYPOINT ["/usr/bin/libreoffice"]
 
