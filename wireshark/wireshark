@@ -7,10 +7,13 @@
 tag="${1:-buster}"
 
 docker run --rm -d \
+    --cap-add=NET_ADMIN \
     -c 4 \
     -m 1024M \
     -v /etc/localtime:/etc/localtime:ro \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v "$(pwd):/home/wireshark/data" \
     -e "DISPLAY=unix${DISPLAY}" \
+    --net host \
     --name wireshark \
-    bghost/wireshark:"${tag}"
+    "bghost/wireshark:${tag}"
