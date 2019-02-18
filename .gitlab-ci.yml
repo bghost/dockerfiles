@@ -14,37 +14,8 @@ before_script:
     - export PLUGDEV=240
     - export AUDIO=18
 
-chromium:edge:
-    script:
-        - cd chromium
-        - bash ./build edge
 
-chromium:sid:
+wireshark:buster:
     script:
-        - cd chromium
-        - bash ./build sid
-
-firefox:rawhide:
-    script:
-        - cd firefox
-        - bash ./build rawhide
-
-firefox:disco:
-    script:
-        - cd firefox
-        - bash ./build disco
-
-firefox:sid:
-    script:
-        - cd firefox
-        - bash ./build sid
-
-libreoffice:edge:
-    script:
-        - cd libreoffice
-        - bash ./build edge
-
-signal-desktop:bionic:
-    script:
-        - cd signal-desktop
-        - bash ./build bionic
+        - cd wireshark
+        - bash ./build buster
