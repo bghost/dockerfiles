@@ -9,7 +9,9 @@ ARG ID
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
         >>/etc/apk/repositories \
     && apk upgrade --no-cache \
-    && apk add libreoffice ttf-dejavu \
+    && apk add libreoffice \
+    ttf-dejavu \
+    py3-unoconv \
     && addgroup -S libreoffice -g $GID \
     && adduser -S libreoffice -G libreoffice -u $ID \
     && addgroup libreoffice audio \
