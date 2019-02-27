@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# You will want the custom seccomp profile from Jessie Frazzelle
-# https://raw.githubusercontent.com/jessfraz/dotfiles/master/etc/docker/seccomp/chrome.json
-
 # Use bghost/wireshark:buster by default
 tag="${1:-buster}"
 
