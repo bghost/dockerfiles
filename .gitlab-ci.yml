@@ -19,3 +19,12 @@ wireshark:buster:
     script:
         - cd wireshark
         - bash ./build buster
+          
+signal-desktop:bionic:
+        - cd signal-desktop
+        - bash ./build bionic
+
+riot:cosmic:
+    script:
+        - cd riot
+        - bash ./build cosmic

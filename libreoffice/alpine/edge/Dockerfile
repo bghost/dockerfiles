@@ -9,7 +9,9 @@ ARG ID
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
         >>/etc/apk/repositories \
     && apk upgrade --no-cache \
-    && apk add libreoffice ttf-dejavu \
+    && apk add libreoffice \
+    ttf-dejavu \
+    py3-unoconv \
     && addgroup -S libreoffice -g $GID \
     && adduser -S libreoffice -G libreoffice -u $ID \
     && addgroup libreoffice audio \
@@ -17,10 +19,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
     && mkdir -p /home/libreoffice/Documents \
     && chown -R libreoffice:libreoffice /home/libreoffice
 
-WORKDIR /home/libreoffice
+WORKDIR /home/libreoffice/Documents
 
 # Run as non privileged user
 USER libreoffice
 
-ENTRYPOINT [ "/usr/bin/libreoffice" ]
+ENTRYPOINT ["/usr/bin/libreoffice"]
 

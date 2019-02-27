@@ -161,7 +161,3 @@ Before running any of the containers, it is necessary to run something such as
   YubiKey
 * for assistance with setting up a YubiKey, [drduh](https://github.com/drduh)
   has a [comprehensive guide](https://github.com/drduh/YubiKey-Guide)
-
-### TODO:
-
-* CI pipeline and Docker REGISTRY for regular updates
