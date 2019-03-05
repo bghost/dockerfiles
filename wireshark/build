@@ -6,7 +6,7 @@ REGISTRY="${REGISTRY:-}"
 
 user='bghost'
 repo='wireshark'
-tag=${1:-buster}
+tag=${1:-cosmic}
 
 # set environment vars
 GID="${GID:-$(id -g)}"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use bghost/wireshark:buster by default
-tag="${1:-buster}"
+tag="${1:-cosmic}"
 
 docker run --rm -d \
     --cap-add=NET_ADMIN \
